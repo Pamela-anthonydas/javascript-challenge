@@ -1,7 +1,7 @@
 // from data.js
 var tableData = data;
 
-// Level 1 & 2 ( Bonus): Automatic Table and Date Search , Level 2: Multiple Search Categories for state and country (Optional)
+// Level 1 & 2 ( Bonus): Automatic Table and Date Search , Level 2: Multiple Search Categories for datetime, city, state, country, shape(Optional)
 
 
 //create a function to (enter -> update -> exit) to populate the html table data
@@ -37,20 +37,23 @@ var datetime = d3.select("#datetime");
 var city = d3.select("#city");
 var state = d3.select("#state");
 var country = d3.select("#country");
+var shape = d3.select("#shape");
 
 // Get the value property of the input element
 var dateinputValue = datetime.property("value");
-//var cityinputValue = city.property("value");
+var cityinputValue = city.property("value");
 var stateinputValue = state.property("value");
 var countryinputValue = country.property("value");
+var shapeinputValue = shape.property("value");
 
 
-// filter the date as required to display the filtered data
-var filteredData = tableData.filter(tdata => tdata.datetime === dateinputValue && tdata.state === stateinputValue && tdata.country === countryinputValue );
+// define all filter criteria and filter the data as required 
+var filteredData = tableData.filter(tdata => tdata.datetime === dateinputValue && tdata.state === stateinputValue && tdata.country === countryinputValue && tdata.shape === shapeinputValue);
 var filterdate=tableData.filter(tdata => tdata.datetime === dateinputValue);
-//var filtercity=tableData.filter(tdata => tdata.city === cityinputValue);
+var filtercity=tableData.filter(tdata => tdata.city === cityinputValue);
 var filterstate=tableData.filter(tdata => tdata.state === stateinputValue );
 var filtercountry=tableData.filter(tdata => tdata.country === countryinputValue );
+var filtershape=tableData.filter(tdata => tdata.shape === shapeinputValue );
   
   //var filteredcity = tableData.filter(tdata => tdata.city === cityinputValue);
 console.log(filteredData);
@@ -72,31 +75,37 @@ else if (filteredData.length === 0){
 	  console.log("filterdate");
 	  console.log(filterdate);
 	}
-	/* else if (filtercity.length !== 0) {
+	else if (filtercity.length !== 0) {
 	  update(filtercity)  ;
 	  console.log("filtercity");
 	  console.log(filtercity);
-	} */
+	} 
 	else if (filterstate.length !== 0) {
 	  update(filterstate)  ;
 	  console.log("filterstate");
 	  console.log(filterstate);
 	}
-	else {
+		else if (filtercountry.length !== 0){
 		update(filtercountry) ;
 		console.log("filtercountry");
 	  console.log(filtercountry);
 	}
+	else {
+		update(filtershape) ;
+		console.log("filtershape");
+	  console.log(filtershape);
+	}
 	  
 } 
 else {
-//tbody.append("tr").append("td").text("No results found!"); 
+/*tbody.append("tr").append("td").text("No results found!"); 
 d3.select("tbody")
 .select("tr")
 .data(filteredData)
 .enter()
 .append("tr")
-.text("No results found!");
+.text("No results found!"); */
+console.log("No results found");
 }
   
 });
